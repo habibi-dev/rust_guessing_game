@@ -1,12 +1,15 @@
+mod utility;
+
 use rand::prelude::*;
 use std::io;
 use std::thread;
 use std::time::Duration;
+use utility::log::log;
 
 fn main() {
     loop {
         play();
-        println!("\n🔁 Do you want to play again? (y/n): ");
+        log("\n🔁 Do you want to play again? (y/n): ");
 
         let mut answer = String::new();
         answer.clear();
@@ -16,7 +19,7 @@ fn main() {
             continue;
         }
 
-        println!("\n👋 Goodbye! 😶‍🌫️");
+        log("\n👋 Goodbye! 😶‍🌫️");
 
         thread::sleep(Duration::from_secs(3));
 
@@ -29,12 +32,12 @@ fn play() {
     let mut guess = String::new();
     let mut luck: u8 = 7;
 
-    println!("🎮 Welcome! \nEnter a number from 1 to 100 to start the game.\n");
+    log("🎮 Welcome! \nEnter a number from 1 to 100 to start the game.\n");
 
     loop {
         if luck == 0 {
             println!("💀 The correct number was {}.", number);
-            println!("❌ You lost!");
+            log("❌ You lost!");
             break;
         }
 
@@ -45,29 +48,29 @@ fn play() {
             .expect("⚠️ Failed to read line");
 
         if guess.is_empty() {
-            println!("⚠️ Please enter a number!");
+            log("⚠️ Please enter a number!");
             continue;
         }
 
         let guess: u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
-                println!("⚠️ Please enter a valid number!");
+                log("⚠️ Please enter a valid number!");
                 continue;
             }
         };
 
         if number == guess {
-            println!("🎉 You guessed the number! 🏆");
+            log("🎉 You guessed the number! 🏆");
             break;
         }
 
         if guess > number {
-            println!("⬇️ It should be a smaller number.");
+            log("⬇️ It should be a smaller number.");
         }
 
         if guess < number {
-            println!("⬆️ It should be a bigger number.");
+            log("⬆️ It should be a bigger number.");
         }
 
         luck -= 1;
