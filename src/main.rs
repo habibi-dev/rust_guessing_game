@@ -1,11 +1,8 @@
 mod utility;
 
-use rand::prelude::*;
-use std::io;
-use std::thread;
-use std::time::Duration;
-use utility::log::log;
-use utility::terminal::clear_screen;
+use rand::random_range;
+use std::{io, thread, time::Duration};
+use utility::{log::log, terminal::clear_screen};
 
 fn main() {
     loop {
@@ -30,7 +27,7 @@ fn main() {
 }
 
 fn play() {
-    let number: u32 = rand::rng().random_range(1..100);
+    let number: u32 = random_range(1..100);
     let mut guess = String::new();
     let mut luck: u8 = 7;
 
