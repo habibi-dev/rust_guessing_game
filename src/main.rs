@@ -5,6 +5,7 @@ use std::io;
 use std::thread;
 use std::time::Duration;
 use utility::log::log;
+use utility::terminal::clear_screen;
 
 fn main() {
     loop {
@@ -16,6 +17,7 @@ fn main() {
         io::stdin().read_line(&mut answer).unwrap();
 
         if answer.to_string().trim().to_lowercase() == "y" {
+            clear_screen();
             continue;
         }
 
@@ -60,7 +62,11 @@ fn play() {
             }
         };
 
+        clear_screen();
+        println!("Your number is: {}", guess);
+
         if number == guess {
+            println!("❤️ Chances left: {}", luck);
             log("🎉 You guessed the number! 🏆");
             break;
         }
